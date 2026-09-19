@@ -1,0 +1,33 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.margin-top-bottom {
+  margin: 20px 0;
+}
+
+.display-flex-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Ajuste nos ícones das abas */
+.tabs .tab a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs .tab a i {
+  margin-right: 5px;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+  .display-flex-buttons button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
