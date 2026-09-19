@@ -55,7 +55,19 @@ body {
   flex: 1 1 200px; /* Adapta a largura do botão automaticamente */
 }
 
-/* Ajustes nos ícones das abas superiores */
+/* --- BARRA DE NAVEGAÇÃO E TÍTULO CORRIGIDOS --- */
+.nav-wrapper .brand-logo {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1.4rem;
+}
+
+.nav-wrapper .brand-logo i {
+  margin-right: 8px;
+}
+
+/* Ajustes nos ícones e textos das abas superiores */
 .tabs .tab a {
   display: flex;
   align-items: center;
@@ -76,19 +88,35 @@ body {
 
 /* --- REGRAS RESPONSIVAS POR DISPOSITIVO --- */
 
-/* 1. Telemóveis Pequenos e Médios (até 600px) */
+/* 1. Telemóveis / Celulares (até 600px) */
 @media (max-width: 600px) {
-  .brand-logo {
-    font-size: 1.3rem !important;
+  /* Correção do título em celulares para não sobrepor outros campos */
+  .nav-wrapper .brand-logo {
+    font-size: 1.1rem !important;
+    position: static !important;
+    transform: none !important;
+    justify-content: center;
+    padding-top: 8px;
+  }
+
+  /* Ajusta a altura da barra para não cobrir as abas de baixo */
+  nav.nav-extended {
+    height: auto !important;
+  }
+
+  /* Garante que as abas fiquem separadas da barra de título */
+  .nav-content {
+    position: relative;
+    clear: both;
   }
 
   .tabs .tab a {
-    font-size: 12px;
-    padding: 0 5px;
+    font-size: 11px;
+    padding: 0 4px;
   }
 
   .tabs .tab a i {
-    font-size: 18px;
+    font-size: 16px;
     margin-right: 2px;
   }
 
@@ -115,7 +143,7 @@ body {
   }
 }
 
-/* 3. Monitores/Computadores (acima de 993px) */
+/* 3. Monitores / Computadores (acima de 993px) */
 @media (min-width: 993px) {
   .container {
     width: 70%; /* Centraliza e limita a largura para não esticar demais a interface */
