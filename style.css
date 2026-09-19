@@ -35,14 +35,20 @@
 body {
   background-color: #f5f5f5;
   font-size: 16px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* Espaçamentos genéricos */
+main {
+  flex: 1 0 auto;
+}
+
 .margin-top-bottom {
   margin: 20px 0;
 }
 
-/* Organização de botões principais */
+/* Flexbox para adaptar botões em qualquer largura */
 .display-flex-buttons {
   display: flex;
   justify-content: space-between;
@@ -52,10 +58,10 @@ body {
 }
 
 .display-flex-buttons button {
-  flex: 1 1 200px; /* Adapta a largura do botão automaticamente */
+  flex: 1 1 200px;
 }
 
-/* --- BARRA DE NAVEGAÇÃO E TÍTULO CORRIGIDOS --- */
+/* Ajustes da barra de navegação */
 .nav-wrapper .brand-logo {
   display: flex;
   align-items: center;
@@ -67,7 +73,6 @@ body {
   margin-right: 8px;
 }
 
-/* Ajustes nos ícones e textos das abas superiores */
 .tabs .tab a {
   display: flex;
   align-items: center;
@@ -79,18 +84,21 @@ body {
   margin-right: 5px;
 }
 
-/* Controlo de scroll horizontal para tabelas em ecrãs pequenos */
+/* Suporte para tabelas compridas em ecrãs pequenos */
 .responsive-table-wrapper {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* --- REGRAS RESPONSIVAS POR DISPOSITIVO --- */
+/* RESPONSIVIDADE POR BREAKPOINTS */
 
-/* 1. Telemóveis / Celulares (até 600px) */
+/* Smartphones (até 600px) */
 @media (max-width: 600px) {
-  /* Correção do título em celulares para não sobrepor outros campos */
+  .container {
+    width: 95% !important;
+  }
+
   .nav-wrapper .brand-logo {
     font-size: 1.1rem !important;
     position: static !important;
@@ -99,12 +107,10 @@ body {
     padding-top: 8px;
   }
 
-  /* Ajusta a altura da barra para não cobrir as abas de baixo */
   nav.nav-extended {
     height: auto !important;
   }
 
-  /* Garante que as abas fiquem separadas da barra de título */
   .nav-content {
     position: relative;
     clear: both;
@@ -112,7 +118,7 @@ body {
 
   .tabs .tab a {
     font-size: 11px;
-    padding: 0 4px;
+    padding: 0 2px;
   }
 
   .tabs .tab a i {
@@ -120,32 +126,39 @@ body {
     margin-right: 2px;
   }
 
-  /* Cartões do Resumo com valores maiores e mais visíveis */
   .card-content h3 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
-  .display-flex-buttons button {
-    width: 100%;
+  .display-flex-buttons button,
+  .full-width-mobile {
+    width: 100% !important;
     margin-bottom: 10px;
   }
 
-  /* Ajuste no formulário para facilitar o toque no ecrã */
-  .input-field input, .input-field select {
-    font-size: 16px; /* Evita zoom automático no iOS ao focar no campo */
+  .total-texto {
+    font-size: 1.2rem;
+    text-align: center !important;
+  }
+
+  /* Evita o zoom automático no Safari/iOS */
+  .input-field input, 
+  .input-field select {
+    font-size: 16px !important;
   }
 }
 
-/* 2. Tablets (de 601px até 992px) */
+/* Tablets (entre 601px e 992px) */
 @media (min-width: 601px) and (max-width: 992px) {
   .container {
-    width: 90%;
+    width: 90% !important;
   }
 }
 
-/* 3. Monitores / Computadores (acima de 993px) */
+/* Desktops e Monitores Grandes (acima de 993px) */
 @media (min-width: 993px) {
   .container {
-    width: 70%; /* Centraliza e limita a largura para não esticar demais a interface */
+    width: 70% !important;
+    max-width: 1200px;
   }
 }

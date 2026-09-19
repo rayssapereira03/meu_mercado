@@ -2,26 +2,21 @@ let produtos = JSON.parse(localStorage.getItem('meu_mercado_produtos')) || [];
 let instaciasTabs;
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Inicializar componentes do Materialize
   const elemsTabs = document.querySelectorAll('.tabs');
   instaciasTabs = M.Tabs.init(elemsTabs);
 
   const elemsSelect = document.querySelectorAll('select');
   M.FormSelect.init(elemsSelect);
 
-  // Renderizar dados iniciais
   atualizarInterface();
 
-  // Evento de submissão do formulário
   document.getElementById('form-produto').addEventListener('submit', adicionarProduto);
 });
 
-// Navegação entre abas
 function navegarPara(idAba) {
   instaciasTabs[0].select(idAba);
 }
 
-// Adicionar produto
 function adicionarProduto(e) {
   e.preventDefault();
 
@@ -42,39 +37,34 @@ function adicionarProduto(e) {
   produtos.push(novoProduto);
   salvarEAtualizar();
 
-  // Resetar Formulário
   document.getElementById('form-produto').reset();
-  M.FormSelect.init(document.querySelectorAll('select')); // reinicia select
+  M.FormSelect.init(document.querySelectorAll('select'));
 
-  M.toast({html: 'Produto adicionado com sucesso!', classes: 'green'});
+  M.toast({html: 'Produto adicionado!', classes: 'green'});
   navegarPara('aba-lista');
 }
 
-// Remover um produto
 function apagarProduto(id) {
   produtos = produtos.filter(p => p.id !== id);
   salvarEAtualizar();
   M.toast({html: 'Produto removido!', classes: 'orange'});
 }
 
-// Apagar toda a lista
 function limparTodaLista() {
   if (produtos.length === 0) return;
 
-  if (confirm('Tem certeza de que deseja apagar todos os produtos da lista?')) {
+  if (confirm('Deseja apagar todos os produtos da lista?')) {
     produtos = [];
     salvarEAtualizar();
-    M.toast({html: 'Lista limpa com sucesso!', classes: 'red'});
+    M.toast({html: 'Lista limpa!', classes: 'red'});
   }
 }
 
-// Salvar no LocalStorage e atualizar ecras
 function salvarEAtualizar() {
   localStorage.setItem('meu_mercado_produtos', JSON.stringify(produtos));
   atualizarInterface();
 }
 
-// Atualizar interface
 function atualizarInterface() {
   const tabela = document.getElementById('tabela-produtos');
   tabela.innerHTML = '';
@@ -101,15 +91,14 @@ function atualizarInterface() {
     tabela.appendChild(tr);
   });
 
-  // Atualizar resumo e totais
   document.getElementById('resumo-qtd').innerText = qtdTotal;
   document.getElementById('resumo-total').innerText = `R$ ${valorTotalCompra.toFixed(2)}`;
   document.getElementById('total-lista').innerText = `R$ ${valorTotalCompra.toFixed(2)}`;
 }
 
-// Registo do Service Worker para suporte PWA
+// Registar o Service Worker para suporte PWA
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js')
     .then(() => console.log('Service Worker Registado com Sucesso!'))
-    .catch(err => console.log('Erro ao registar Service Worker:', err));
+    .catch(err => console.log('Erro no Service Worker:', err));
 }
